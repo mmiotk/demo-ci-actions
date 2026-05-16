@@ -57,3 +57,15 @@ jobs:
         run: | 
           ls -la dist
           echo "Build artifact ready"
+
+  version:
+    name: Version 
+    runs-on: ubuntu-latest
+    outputs: 
+      app_version: ${{steps.ver.outputs.version}}
+      short_sha: ${{steps.ver.outputs.sha}}
+    steps:
+      - id: ver
+        run: |
+          echo "version=1.0.0" >> $GITHUB_OUTPUT
+          echo "sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
