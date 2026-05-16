@@ -38,4 +38,21 @@ jobs:
 
       - name: Run test
         run: npm test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build application
+        run: npm run build
+      - name: Verify build
+        run: | 
+          ls -la dist
+          echo "Build artifact ready"
