@@ -15,6 +15,9 @@ on:
         required: false
         type: boolean
         default: true
+env: 
+  NODE_VERSION: '20'
+  APP_NAME: 'demo-ci-actions'
 
 jobs:
   lint:
@@ -27,7 +30,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{env.NODE_VERSION}}
 
       - name: Run linter
         run: npm run lint
@@ -42,7 +45,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{env.NODE_VERSION}}
 
       - name: Install dependencies
         run: npm ci || npm install
@@ -61,7 +64,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{env.NODE_VERSION}}
       - name: Build application
         run: npm run build
       - name: Verify build
@@ -84,3 +87,19 @@ jobs:
         run: |
           echo "version=1.0.0" >> $GITHUB_OUTPUT
           echo "sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+  info:
+    name: Info pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show GitHub context
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Short SHA: ${GITHUB_SHA::7}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Run number: ${{ github.run_number }}"
+          echo "Run ID: ${{ github.run_id }}"
