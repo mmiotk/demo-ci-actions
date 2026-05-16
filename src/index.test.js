@@ -1,6 +1,6 @@
 const { describe, it } = require("node:test");
 const assert = require("node:assert");
-const { add, multiply, greet } = require("./index");
+const { add, multiply, greet, substract } = require("./index");
 
 describe("add", () => {
   it("adds two numbers", () => {
@@ -8,6 +8,12 @@ describe("add", () => {
   });
   it("handles negatives", () => {
     assert.strictEqual(add(-1, 1), 0);
+  });
+});
+
+describe("substract", () => {
+  it("subtract two numbers", () => {
+    assert.strictEqual(substract(2, 3), -1);
   });
 });
 
