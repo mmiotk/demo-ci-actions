@@ -1,3 +1,3 @@
 ## README
 
-Ala ma kota
+Ala ma kota kota ma prezes
